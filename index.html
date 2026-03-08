@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BEGOOD — Sustainable Clothing Sourcing Limited</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ── VARIABLES ─────────────────────────────────────────── */
+:root {
+  --forest:  #2C5F2D;
+  --moss:    #6A994E;
+  --sage:    #A7C957;
+  --cream:   #F5F0E8;
+  --sand:    #E9EDC9;
+  --dark:    #1A2E1A;
+  --teal:    #028090;
+  --white:   #FFFFFF;
+  --gray:    #6B7280;
+  --lgray:   #F0F4F0;
+  --accent:  #FCA311;
+  --mid:     #3D7A3F;
+  --text:    #1f2e1f;
+}
+
+/* ── RESET & BASE ─────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+
+/* ── SCROLLBAR ────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: var(--moss); border-radius: 3px; }
+
+/* ── UTILITY ──────────────────────────────────────────── */
+.container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
+.tag {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sage);
+  border: 1px solid rgba(167,201,87,0.4);
+  padding: 0.3rem 0.85rem;
+  border-radius: 2px;
+  margin-bottom: 1.2rem;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.15;
+  font-weight: 700;
+}
+.fade-in {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-delay-1 { transition-delay: 0.1s; }
+.fade-delay-2 { transition-delay: 0.2s; }
+.fade-delay-3 { transition-delay: 0.3s; }
+.fade-delay-4 { transition-delay: 0.4s; }
+.fade-delay-5 { transition-delay: 0.5s; }
+.fade-delay-6 { transition-delay: 0.6s; }
+
+/* ── NAVIGATION ───────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.2rem 0;
+  transition: background 0.35s, padding 0.35s, box-shadow 0.35s;
+}
+nav.scrolled {
+  background: rgba(26,46,26,0.97);
+  backdrop-filter: blur(12px);
+  padding: 0.7rem 0;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.25);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1140px; margin: 0 auto; padding: 0 2rem;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.nav-logo-icon {
+  width: 36px; height: 36px;
+  background: var(--forest);
+  border: 2px solid var(--sage);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-logo-icon svg { width: 18px; height: 18px; fill: var(--white); }
+.nav-logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem; font-weight: 900;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+.nav-logo-text span { color: var(--sage); }
+.nav-links {
+  display: flex; gap: 2.2rem; list-style: none;
+}
+.nav-links a {
+  font-size: 0.85rem; font-weight: 500;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
+  height: 1px; background: var(--sage);
+  transform: scaleX(0); transition: transform 0.2s;
+}
+.nav-links a:hover { color: var(--sage); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-cta {
+  background: var(--sage); color: var(--dark) !important;
+  padding: 0.5rem 1.2rem; border-radius: 2px; font-weight: 600;
+}
+.nav-cta::after { display: none; }
+.nav-cta:hover { background: var(--moss); color: var(--white) !important; }
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px; cursor: pointer;
+  padding: 4px;
+}
+.nav-hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--white); border-radius: 2px;
+  transition: all 0.3s;
+}
+.mobile-menu {
+  display: none; position: fixed; inset: 0; z-index: 99;
+  background: var(--dark);
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 2rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; color: var(--white); font-weight: 700;
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--sage); }
+
+/* ── HERO ─────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  background: var(--dark);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 80% at -10% -10%, rgba(44,95,45,0.55) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 110% 80%, rgba(2,128,144,0.3) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 50% 110%, rgba(106,153,78,0.2) 0%, transparent 60%);
+}
+.hero-grid {
+  position: absolute; inset: 0; opacity: 0.04;
+  background-image:
+    linear-gradient(var(--sage) 1px, transparent 1px),
+    linear-gradient(90deg, var(--sage) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 1140px; margin: 0 auto; padding: 8rem 2rem 6rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+}
+.hero-left { }
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.5rem;
+}
+.hero-line {
+  width: 40px; height: 2px; background: var(--sage);
+}
+.hero-eyebrow-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.18em; color: var(--sage);
+  text-transform: uppercase;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.0;
+  color: var(--white);
+  margin-bottom: 0.3rem;
+}
+.hero-title .good {
+  color: var(--sage);
+  display: block;
+}
+.hero-subtitle {
+  font-size: 0.8rem; font-weight: 500;
+  letter-spacing: 0.2em; color: var(--sand);
+  text-transform: uppercase; margin-bottom: 1.5rem;
+  font-family: 'DM Mono', monospace;
+}
+.hero-tagline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  font-style: italic;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.5;
+  margin-bottom: 2.5rem;
+  border-left: 3px solid var(--sage);
+  padding-left: 1.2rem;
+}
+.hero-buttons {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  font-size: 0.85rem; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; border-radius: 2px;
+  transition: all 0.25s; cursor: pointer; border: none;
+}
+.btn-primary {
+  background: var(--sage); color: var(--dark);
+}
+.btn-primary:hover { background: var(--moss); color: var(--white); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(106,153,78,0.35); }
+.btn-outline {
+  background: transparent; color: var(--white);
+  border: 1.5px solid rgba(255,255,255,0.4);
+}
+.btn-outline:hover { border-color: var(--sage); color: var(--sage); transform: translateY(-2px); }
+
+.hero-right {
+  display: flex; flex-direction: column; gap: 1.2rem;
+}
+.hero-stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
+.hero-stat {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(167,201,87,0.2);
+  padding: 1.4rem 1.2rem;
+  border-radius: 3px;
+  transition: background 0.2s, transform 0.2s;
+}
+.hero-stat:hover {
+  background: rgba(255,255,255,0.09);
+  transform: translateY(-3px);
+}
+.hero-stat-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 700;
+  color: var(--sage); line-height: 1;
+  margin-bottom: 0.35rem;
+}
+.hero-stat-label {
+  font-size: 0.8rem; color: rgba(255,255,255,0.6);
+  font-weight: 400; line-height: 1.3;
+}
+.hero-badges {
+  display: flex; flex-wrap: wrap; gap: 0.6rem;
+}
+.hero-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.1em;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid rgba(167,201,87,0.3);
+  color: var(--sand); border-radius: 2px;
+}
+.hero-scroll {
+  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  color: rgba(255,255,255,0.4); font-size: 0.7rem; letter-spacing: 0.1em;
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+.hero-scroll svg { width: 20px; height: 20px; stroke: rgba(255,255,255,0.4); }
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+
+/* ── ABOUT ────────────────────────────────────────────── */
+#about {
+  padding: 7rem 0;
+  background: var(--lgray);
+  position: relative; overflow: hidden;
+}
+.about-orb {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle, rgba(44,95,45,0.12) 0%, transparent 70%);
+}
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: center;
+}
+.about-visual {
+  position: relative;
+}
+.about-card-main {
+  background: var(--forest);
+  border-radius: 4px;
+  padding: 3rem 2.5rem;
+  color: var(--white);
+  position: relative; overflow: hidden;
+}
+.about-card-main::before {
+  content: '';
+  position: absolute; top: -40px; right: -40px;
+  width: 160px; height: 160px; border-radius: 50%;
+  background: rgba(106,153,78,0.2);
+}
+.about-leaf {
+  width: 52px; height: 52px; margin-bottom: 1.5rem;
+  background: rgba(167,201,87,0.15);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+}
+.about-leaf svg { width: 28px; height: 28px; fill: var(--sage); }
+.about-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; font-weight: 700; line-height: 1.25;
+  margin-bottom: 1rem;
+}
+.about-card-text {
+  font-size: 0.9rem; line-height: 1.7; color: var(--sand); font-weight: 300;
+}
+.about-stats-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+.about-stat-mini {
+  background: rgba(255,255,255,0.07);
+  padding: 0.9rem 0.7rem; border-radius: 3px; text-align: center;
+}
+.about-stat-mini-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 700; color: var(--accent);
+}
+.about-stat-mini-lbl {
+  font-size: 0.68rem; color: rgba(255,255,255,0.55); margin-top: 0.2rem;
+}
+.about-float-badge {
+  position: absolute; right: -1.5rem; bottom: 3rem;
+  background: var(--teal); color: var(--white);
+  padding: 0.9rem 1.2rem; border-radius: 3px;
+  font-size: 0.78rem; font-weight: 600; line-height: 1.4;
+  box-shadow: 0 8px 28px rgba(2,128,144,0.3);
+  max-width: 160px;
+}
+.about-float-badge strong {
+  display: block; font-size: 1.2rem;
+  font-family: 'Playfair Display', serif; color: var(--sand);
+}
+
+.about-right {}
+.about-intro {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 700; line-height: 1.25;
+  color: var(--dark);
+  margin-bottom: 1.5rem;
+}
+.about-intro em { color: var(--forest); font-style: italic; }
+.about-body {
+  font-size: 0.95rem; line-height: 1.8; color: #3d4d3d;
+  margin-bottom: 1.5rem;
+}
+.about-quote {
+  border-left: 3px solid var(--sage);
+  padding: 1rem 1.5rem;
+  background: rgba(44,95,45,0.05);
+  border-radius: 0 3px 3px 0;
+  margin-bottom: 2rem;
+}
+.about-quote p {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem; font-style: italic; color: var(--forest); line-height: 1.6;
+}
+.about-pillars {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;
+}
+.about-pillar {
+  display: flex; align-items: flex-start; gap: 0.7rem;
+  padding: 0.9rem; background: var(--white);
+  border-radius: 3px; border: 1px solid rgba(44,95,45,0.1);
+}
+.about-pillar-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--moss); flex-shrink: 0; margin-top: 5px;
+}
+.about-pillar-text {
+  font-size: 0.85rem; font-weight: 500; color: var(--dark);
+}
+
+/* ── PRODUCTS ─────────────────────────────────────────── */
+#products {
+  padding: 7rem 0;
+  background: var(--dark);
+  position: relative; overflow: hidden;
+}
+.products-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 0% 100%, rgba(44,95,45,0.3) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 100% 0%, rgba(2,128,144,0.2) 0%, transparent 50%);
+}
+.products-header {
+  text-align: center; margin-bottom: 4rem;
+  position: relative; z-index: 2;
+}
+.products-header .section-title { color: var(--white); }
+.products-header p {
+  font-size: 1rem; color: rgba(255,255,255,0.6);
+  max-width: 520px; margin: 1rem auto 0; line-height: 1.7;
+}
+.products-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  position: relative; z-index: 2;
+}
+.product-card {
+  border-radius: 4px; overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: default;
+}
+.product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+.product-card-top {
+  padding: 2.5rem 2rem 1.5rem;
+  position: relative; overflow: hidden; min-height: 220px;
+}
+.pc-forest .product-card-top { background: var(--forest); }
+.pc-mid    .product-card-top { background: var(--mid); }
+.pc-teal   .product-card-top { background: var(--teal); }
+.product-icon-wrap {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.3rem;
+}
+.product-icon-wrap svg { width: 32px; height: 32px; fill: var(--white); }
+.product-card-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 700; color: var(--white);
+  line-height: 1.2; margin-bottom: 0.5rem;
+}
+.product-card-tagline {
+  font-size: 0.8rem; color: rgba(255,255,255,0.65); font-style: italic;
+}
+.product-card-body {
+  padding: 1.5rem 2rem 2rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-top: none;
+}
+.product-card-desc {
+  font-size: 0.88rem; line-height: 1.7; color: rgba(255,255,255,0.65); margin-bottom: 1.2rem;
+}
+.product-card-feature {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.8rem; color: var(--sage); margin-bottom: 0.4rem;
+}
+.product-card-feature::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--sage); flex-shrink: 0;
+}
+
+/* ── COMMITMENT ───────────────────────────────────────── */
+#commitment {
+  padding: 7rem 0;
+  background: var(--cream);
+  position: relative;
+}
+.commitment-header {
+  text-align: center; margin-bottom: 4.5rem;
+}
+.commitment-header .section-title { color: var(--dark); }
+.commitment-header p {
+  font-size: 1rem; color: var(--gray); max-width: 520px;
+  margin: 1rem auto 0; line-height: 1.7;
+}
+.commitment-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+.commitment-card {
+  display: flex; gap: 1.5rem; align-items: flex-start;
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 4px;
+  border: 1px solid rgba(44,95,45,0.1);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.commitment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(44,95,45,0.12);
+}
+.commitment-icon {
+  width: 56px; height: 56px; border-radius: 3px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.ci-forest { background: var(--forest); }
+.ci-moss   { background: var(--moss); }
+.ci-teal   { background: var(--teal); }
+.ci-brown  { background: #5A3E28; }
+.commitment-icon svg { width: 26px; height: 26px; fill: var(--white); }
+.commitment-text h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; font-weight: 700; color: var(--dark);
+  margin-bottom: 0.5rem;
+}
+.commitment-text p {
+  font-size: 0.88rem; line-height: 1.65; color: var(--gray);
+}
+.commitment-cta-bar {
+  background: var(--forest);
+  border-radius: 4px;
+  padding: 2.5rem 3rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+  flex-wrap: wrap;
+}
+.commitment-cta-text h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; color: var(--white); font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.commitment-cta-text p {
+  font-size: 0.9rem; color: var(--sand); font-style: italic;
+}
+
+/* ── COMMUNITY ────────────────────────────────────────── */
+#community {
+  padding: 7rem 0;
+  background: var(--lgray);
+}
+.community-grid {
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 5rem; align-items: start;
+}
+.community-left {}
+.community-left .tag { margin-bottom: 1rem; }
+.community-left .section-title { margin-bottom: 1rem; }
+.community-lead {
+  font-size: 1rem; line-height: 1.75; color: #3d4d3d; margin-bottom: 2.5rem;
+}
+.community-items { display: flex; flex-direction: column; gap: 1rem; }
+.community-item {
+  display: flex; gap: 1.2rem; align-items: flex-start;
+  padding: 1.4rem 1.5rem;
+  background: var(--white);
+  border-radius: 3px;
+  border-left: 4px solid transparent;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.community-item:hover {
+  border-left-color: var(--moss);
+  transform: translateX(4px);
+  box-shadow: 0 6px 24px rgba(44,95,45,0.1);
+}
+.community-item-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; font-weight: 900;
+  color: var(--sage); line-height: 1; flex-shrink: 0;
+  width: 2.2rem;
+}
+.community-item h3 {
+  font-size: 0.95rem; font-weight: 600; color: var(--dark);
+  margin-bottom: 0.35rem;
+}
+.community-item p {
+  font-size: 0.85rem; line-height: 1.6; color: var(--gray);
+}
+
+.community-right {
+  display: flex; flex-direction: column; gap: 1.5rem;
+  position: sticky; top: 100px;
+}
+.impact-card {
+  background: var(--dark);
+  border-radius: 4px; padding: 2.5rem;
+  position: relative; overflow: hidden;
+}
+.impact-card::before {
+  content: '';
+  position: absolute; top: -30px; right: -30px;
+  width: 130px; height: 130px; border-radius: 50%;
+  background: rgba(44,95,45,0.3);
+}
+.impact-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem; font-weight: 700; color: var(--white);
+  margin-bottom: 1.5rem; position: relative;
+}
+.impact-rows { display: flex; flex-direction: column; gap: 0.9rem; }
+.impact-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.impact-row:last-child { border-bottom: none; }
+.impact-row-label { font-size: 0.82rem; color: rgba(255,255,255,0.6); }
+.impact-row-val {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem; color: var(--sage); font-weight: 500;
+}
+.values-card {
+  background: var(--forest); border-radius: 4px; padding: 2rem;
+}
+.values-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; color: var(--white); margin-bottom: 1.2rem;
+}
+.values-list {
+  display: flex; flex-direction: column; gap: 0.7rem;
+}
+.value-item {
+  display: flex; align-items: center; gap: 0.7rem;
+  font-size: 0.85rem; color: var(--sand);
+}
+.value-item::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--sage); flex-shrink: 0;
+}
+
+/* ── WHY BEGOOD ───────────────────────────────────────── */
+#why {
+  padding: 7rem 0;
+  background: var(--forest);
+  position: relative; overflow: hidden;
+}
+.why-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 100% 0%, rgba(2,128,144,0.25) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 0% 100%, rgba(26,46,26,0.6) 0%, transparent 55%);
+}
+.why-header { text-align: center; margin-bottom: 4rem; position: relative; z-index: 2; }
+.why-header .section-title { color: var(--white); }
+.why-header p {
+  font-size: 1rem; color: rgba(255,255,255,0.6);
+  max-width: 500px; margin: 1rem auto 0; line-height: 1.7;
+}
+.why-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem;
+  position: relative; z-index: 2;
+}
+.why-card {
+  padding: 2rem 1.8rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(167,201,87,0.2);
+  border-radius: 3px;
+  transition: background 0.25s, transform 0.25s;
+}
+.why-card:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-4px);
+}
+.why-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem; font-weight: 900;
+  color: rgba(167,201,87,0.25); line-height: 1;
+  margin-bottom: 0.8rem;
+}
+.why-card h3 {
+  font-size: 0.95rem; font-weight: 600; color: var(--sage);
+  margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 0.06em;
+  font-family: 'DM Mono', monospace;
+}
+.why-card p {
+  font-size: 0.88rem; line-height: 1.65; color: rgba(255,255,255,0.65);
+}
+
+/* ── PARTNER ──────────────────────────────────────────── */
+#partner {
+  padding: 7rem 0;
+  background: var(--cream);
+}
+.partner-header { text-align: center; margin-bottom: 4rem; }
+.partner-header .section-title { color: var(--dark); }
+.partner-header p {
+  font-size: 1rem; color: var(--gray); max-width: 500px;
+  margin: 1rem auto 0; line-height: 1.7;
+}
+.partner-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+}
+.partner-card { border-radius: 4px; overflow: hidden; }
+.partner-card-header {
+  padding: 2.5rem 2.5rem 1.5rem;
+  position: relative;
+}
+.pc-buyer .partner-card-header  { background: var(--forest); }
+.pc-invest .partner-card-header { background: var(--teal); }
+.partner-card-header-icon {
+  width: 50px; height: 50px; border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.2rem;
+}
+.partner-card-header-icon svg { width: 24px; height: 24px; fill: var(--white); }
+.partner-card-header h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; font-weight: 700; color: var(--white);
+  margin-bottom: 0.4rem;
+}
+.partner-card-header p {
+  font-size: 0.85rem; color: rgba(255,255,255,0.65); font-style: italic;
+}
+.partner-card-body {
+  padding: 2rem 2.5rem;
+  background: var(--white);
+  border: 1px solid rgba(44,95,45,0.1); border-top: none;
+}
+.partner-features { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+.partner-features li {
+  display: flex; align-items: flex-start; gap: 0.7rem;
+  font-size: 0.9rem; color: #3d4d3d; line-height: 1.5;
+}
+.partner-features li::before {
+  content: '✓'; color: var(--moss); font-weight: 700; flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── CONTACT ──────────────────────────────────────────── */
+#contact {
+  padding: 7rem 0;
+  background: var(--dark);
+  position: relative; overflow: hidden;
+}
+.contact-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 60% at -10% 50%, rgba(44,95,45,0.4) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 110% 50%, rgba(2,128,144,0.25) 0%, transparent 55%);
+}
+.contact-header {
+  text-align: center; margin-bottom: 4rem;
+  position: relative; z-index: 2;
+}
+.contact-header .section-title { color: var(--white); }
+.contact-header p {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-style: italic;
+  color: rgba(255,255,255,0.7); margin-top: 0.8rem;
+}
+.contact-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem;
+  position: relative; z-index: 2;
+  margin-bottom: 3rem;
+}
+.contact-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 3px; padding: 2rem 1.5rem;
+  text-align: center;
+  transition: background 0.25s, transform 0.25s;
+}
+.contact-card:hover {
+  background: rgba(255,255,255,0.09);
+  transform: translateY(-4px);
+}
+.contact-icon {
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.2rem;
+}
+.contact-icon svg { width: 24px; height: 24px; fill: var(--white); }
+.ci1 { background: var(--forest); }
+.ci2 { background: var(--mid); }
+.ci3 { background: var(--teal); }
+.ci4 { background: #5A3E28; }
+.contact-card h4 {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem; letter-spacing: 0.15em; color: var(--sage);
+  text-transform: uppercase; margin-bottom: 0.6rem;
+}
+.contact-card p {
+  font-size: 0.85rem; color: var(--sand); line-height: 1.5;
+}
+.contact-form-wrap {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px; padding: 3rem;
+  position: relative; z-index: 2;
+  max-width: 700px; margin: 0 auto;
+}
+.contact-form-wrap h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; color: var(--white); font-weight: 700;
+  margin-bottom: 0.5rem; text-align: center;
+}
+.contact-form-wrap > p {
+  font-size: 0.9rem; color: rgba(255,255,255,0.5);
+  text-align: center; margin-bottom: 2rem;
+}
+.form-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  margin-bottom: 1rem;
+}
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+.form-group label {
+  font-size: 0.78rem; font-weight: 500; color: rgba(255,255,255,0.5);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  font-family: 'DM Mono', monospace;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--white);
+  padding: 0.8rem 1rem;
+  border-radius: 2px; font-size: 0.9rem;
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.2s, background 0.2s;
+  outline: none; width: 100%;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--sage);
+  background: rgba(255,255,255,0.09);
+}
+.form-group select option { background: var(--dark); }
+.form-group textarea { resize: vertical; min-height: 110px; }
+.form-submit { text-align: center; margin-top: 0.5rem; }
+
+/* ── FOOTER ───────────────────────────────────────────── */
+footer {
+  background: #0d1a0d;
+  padding: 3rem 0 2rem;
+  border-top: 1px solid rgba(167,201,87,0.15);
+}
+.footer-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; font-weight: 900; color: var(--white);
+}
+.footer-logo span { color: var(--sage); }
+.footer-tagline {
+  font-size: 0.8rem; color: rgba(255,255,255,0.4); font-style: italic;
+  margin-top: 0.2rem;
+}
+.footer-links {
+  display: flex; gap: 2rem; flex-wrap: wrap;
+}
+.footer-links a {
+  font-size: 0.8rem; color: rgba(255,255,255,0.5);
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--sage); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 1.5rem;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+}
+.footer-bottom p {
+  font-size: 0.75rem; color: rgba(255,255,255,0.3);
+}
+.footer-bottom .footer-bottom-right {
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+}
+.footer-pill {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem; color: rgba(255,255,255,0.3);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 0.2rem 0.6rem; border-radius: 2px;
+}
+
+/* ── RESPONSIVE ────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero-content { grid-template-columns: 1fr; gap: 3rem; padding-top: 7rem; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-float-badge { display: none; }
+  .products-grid { grid-template-columns: 1fr; }
+  .commitment-grid { grid-template-columns: 1fr; }
+  .community-grid { grid-template-columns: 1fr; }
+  .community-right { position: static; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .partner-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .commitment-cta-bar { flex-direction: column; text-align: center; }
+  .hero-stats { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .why-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr 1fr; }
+  .about-stats-row { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ──────────────────────────── -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 2-10 2 0 0 4-1 5 1C17 8 7 8 7 14c0 0 2.5-5.5 10-6z"/></svg>
+      </div>
+      <div>
+        <div class="nav-logo-text">BE<span>GOOD</span></div>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#commitment">Sustainability</a></li>
+      <li><a href="#community">Impact</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about"      onclick="toggleMenu()">About</a>
+  <a href="#products"   onclick="toggleMenu()">Products</a>
+  <a href="#commitment" onclick="toggleMenu()">Sustainability</a>
+  <a href="#community"  onclick="toggleMenu()">Impact</a>
+  <a href="#why"        onclick="toggleMenu()">Why Us</a>
+  <a href="#contact"    onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- ── HERO ─────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-eyebrow fade-in">
+        <div class="hero-line"></div>
+        <span class="hero-eyebrow-text">Social Business · Bangladesh</span>
+      </div>
+      <h1 class="hero-title fade-in fade-delay-1">
+        BE<span class="good">GOOD</span>
+      </h1>
+      <p class="hero-subtitle fade-in fade-delay-2">Sustainable Clothing Sourcing Limited</p>
+      <p class="hero-tagline fade-in fade-delay-2">
+        Fashion that does good —<br>for people, for planet.
+      </p>
+      <div class="hero-buttons fade-in fade-delay-3">
+        <a href="#products" class="btn btn-primary">Our Products</a>
+        <a href="#contact" class="btn btn-outline">Partner With Us</a>
+      </div>
+    </div>
+    <div class="hero-right fade-in fade-delay-3">
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-val">100%</div>
+          <div class="hero-stat-label">Organic<br>Materials</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">Zero</div>
+          <div class="hero-stat-label">Waste<br>Philosophy</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">Fair</div>
+          <div class="hero-stat-label">Labour<br>Guaranteed</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">Net+</div>
+          <div class="hero-stat-label">Carbon<br>Impact Goal</div>
+        </div>
+      </div>
+      <div class="hero-badges">
+        <span class="hero-badge">Social Business</span>
+        <span class="hero-badge">Licensed · Registered</span>
+        <span class="hero-badge">Dhaka, Bangladesh</span>
+        <span class="hero-badge">Ethically Made</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- ── ABOUT ─────────────────────────────────── -->
+<section id="about">
+  <div class="about-orb" style="width:400px;height:400px;top:-100px;left:-150px;"></div>
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual fade-in">
+        <div class="about-card-main">
+          <div class="about-leaf">
+            <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 2-10 2 0 0 4-1 5 1C17 8 7 8 7 14c0 0 2.5-5.5 10-6z"/></svg>
+          </div>
+          <div class="about-card-title">A Social Business<br>Built on Purpose</div>
+          <div class="about-card-text">BEGOOD is not just a clothing company. We are a movement — connecting conscious global buyers with responsible production at the source, right here in Bangladesh.</div>
+          <div class="about-stats-row">
+            <div class="about-stat-mini">
+              <div class="about-stat-mini-val">100%</div>
+              <div class="about-stat-mini-lbl">Organic</div>
+            </div>
+            <div class="about-stat-mini">
+              <div class="about-stat-mini-val">Fair</div>
+              <div class="about-stat-mini-lbl">Labour</div>
+            </div>
+            <div class="about-stat-mini">
+              <div class="about-stat-mini-val">Zero</div>
+              <div class="about-stat-mini-lbl">Waste Goal</div>
+            </div>
+          </div>
+        </div>
+        <div class="about-float-badge">
+          <strong>Dhaka HQ</strong>
+          Registered &amp; Licensed in Bangladesh
+        </div>
+      </div>
+      <div class="about-right fade-in fade-delay-2">
+        <div class="tag">Who We Are</div>
+        <h2 class="section-title about-intro">
+          Where <em>ethics</em> and fashion finally meet.
+        </h2>
+        <p class="about-body">
+          BEGOOD Sustainable Clothing Sourcing Limited (BGSCSL) is a registered social business based in Dhaka, Bangladesh. We source and deliver ethically made garments built on organic materials, fair labour practices, and zero-waste principles — for buyers around the world who care about where their clothes come from.
+        </p>
+        <div class="about-quote">
+          <p>"We aim to create a world where fashion is a force for good — nurturing the environment and empowering every individual in the supply chain."</p>
+        </div>
+        <div class="about-pillars">
+          <div class="about-pillar"><div class="about-pillar-dot"></div><div class="about-pillar-text">Sustainability</div></div>
+          <div class="about-pillar"><div class="about-pillar-dot"></div><div class="about-pillar-text">Responsibility</div></div>
+          <div class="about-pillar"><div class="about-pillar-dot"></div><div class="about-pillar-text">Community First</div></div>
+          <div class="about-pillar"><div class="about-pillar-dot"></div><div class="about-pillar-text">Transparency</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRODUCTS ──────────────────────────────── -->
+<section id="products">
+  <div class="products-bg"></div>
+  <div class="container">
+    <div class="products-header fade-in">
+      <div class="tag">Our Products</div>
+      <h2 class="section-title">Garments built for<br>conscious buyers.</h2>
+      <p>Every piece we make reflects our commitment to organic materials, fair wages, and a cleaner planet.</p>
+    </div>
+    <div class="products-grid">
+      <div class="product-card pc-forest fade-in fade-delay-1">
+        <div class="product-card-top">
+          <div class="product-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M5 3h14l-1.68 5.39A2 2 0 0115.4 10H8.6a2 2 0 01-1.92-1.61L5 3zM3 10h18v11H3z"/></svg>
+          </div>
+          <div class="product-card-name">Organic<br>Clothing</div>
+          <div class="product-card-tagline">Clean from field to fabric</div>
+        </div>
+        <div class="product-card-body">
+          <p class="product-card-desc">Garments made from 100% organic cotton, hemp, and sustainable fabrics — grown without harmful pesticides, protecting farmers, ecosystems, and the end wearer.</p>
+          <div class="product-card-feature">GOTS-aligned organic standards</div>
+          <div class="product-card-feature">No synthetic chemicals</div>
+          <div class="product-card-feature">Farm-to-garment traceability</div>
+        </div>
+      </div>
+      <div class="product-card pc-mid fade-in fade-delay-2">
+        <div class="product-card-top">
+          <div class="product-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 110 20A10 10 0 0112 2zm0 3.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-2 9.5l1.5-3h1l1.5 3H14l-.5-1h-3l-.5 1H10zm.5-2h3l-.5-1h-2l-.5 1z"/><path d="M7.5 8.5C6 10 5.5 12 5.5 12s1 4.5 6.5 4.5 6.5-4.5 6.5-4.5-1-4-3-5.5c0 0-.5 3-4 3s-4-3-4-3z"/></svg>
+          </div>
+          <div class="product-card-name">Biodegradable<br>Fashion</div>
+          <div class="product-card-tagline">Style that returns to the earth</div>
+        </div>
+        <div class="product-card-body">
+          <p class="product-card-desc">Every piece is designed to decompose naturally after its useful life, reducing the burden on landfills and contributing to a circular economy in fashion.</p>
+          <div class="product-card-feature">Natural fibre construction</div>
+          <div class="product-card-feature">Zero synthetic blends</div>
+          <div class="product-card-feature">End-of-life compostable</div>
+        </div>
+      </div>
+      <div class="product-card pc-teal fade-in fade-delay-3">
+        <div class="product-card-top">
+          <div class="product-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          </div>
+          <div class="product-card-name">Custom &amp;<br>Ethical Sourcing</div>
+          <div class="product-card-tagline">Small batches, big impact</div>
+        </div>
+        <div class="product-card-body">
+          <p class="product-card-desc">Flexible small-batch and custom orders for retail outlets, events, organisations, and gifts — fully traceable from fabric to finished piece, with fair labour at every stage.</p>
+          <div class="product-card-feature">Low minimum order quantities</div>
+          <div class="product-card-feature">Custom labels &amp; packaging</div>
+          <div class="product-card-feature">Verified ethical supply chain</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMMITMENT ────────────────────────────── -->
+<section id="commitment">
+  <div class="container">
+    <div class="commitment-header fade-in">
+      <div class="tag">Environmental Commitment</div>
+      <h2 class="section-title">Responsible at<br>every step.</h2>
+      <p>We integrate environmental responsibility into everything — from the seed in the ground to the garment on your shelf.</p>
+    </div>
+    <div class="commitment-grid">
+      <div class="commitment-card fade-in fade-delay-1">
+        <div class="commitment-icon ci-forest">
+          <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 2-10 2 0 0 4-1 5 1C17 8 7 8 7 14c0 0 2.5-5.5 10-6z"/></svg>
+        </div>
+        <div class="commitment-text">
+          <h3>Organic Inputs Only</h3>
+          <p>All raw materials are sourced without harmful pesticides or synthetic fertilizers. Clean from field to fabric — no shortcuts.</p>
+        </div>
+      </div>
+      <div class="commitment-card fade-in fade-delay-2">
+        <div class="commitment-icon ci-moss">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm1 17.93V18a1 1 0 00-2 0v1.93A8.001 8.001 0 014.07 13H6a1 1 0 000-2H4.07A8.001 8.001 0 0111 4.07V6a1 1 0 002 0V4.07A8.001 8.001 0 0119.93 11H18a1 1 0 000 2h1.93A8.001 8.001 0 0113 19.93z"/></svg>
+        </div>
+        <div class="commitment-text">
+          <h3>Zero Waste Production</h3>
+          <p>Energy-efficient facilities, minimised water consumption, and full material recycling throughout every stage of the production cycle.</p>
+        </div>
+      </div>
+      <div class="commitment-card fade-in fade-delay-3">
+        <div class="commitment-icon ci-teal">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="commitment-text">
+          <h3>Carbon Offset Programs</h3>
+          <p>We invest in reforestation, renewable energy projects, and sustainable agriculture to offset our footprint and work toward a net positive environmental impact.</p>
+        </div>
+      </div>
+      <div class="commitment-card fade-in fade-delay-4">
+        <div class="commitment-icon ci-brown" style="background:#5A3E28">
+          <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        </div>
+        <div class="commitment-text">
+          <h3>Ethical Supply Chain</h3>
+          <p>Every partner in our supply chain meets verified fair labour standards — transparent working conditions, fair wages, and documented accountability from source to delivery.</p>
+        </div>
+      </div>
+    </div>
+    <div class="commitment-cta-bar fade-in">
+      <div class="commitment-cta-text">
+        <h3>Our goal: zero carbon by 2030.</h3>
+        <p>Every order you place contributes to this journey.</p>
+      </div>
+      <a href="#contact" class="btn btn-primary">Join the Movement</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMMUNITY ─────────────────────────────── -->
+<section id="community">
+  <div class="container">
+    <div class="community-grid">
+      <div class="community-left">
+        <div class="tag fade-in">Community &amp; Social Impact</div>
+        <h2 class="section-title fade-in fade-delay-1">People are at<br>the heart of<br>what we do.</h2>
+        <p class="community-lead fade-in fade-delay-2">A thriving fashion industry cannot be built on exploitation. BEGOOD is committed to actively engaging with — and giving back to — the communities that make our work possible.</p>
+        <div class="community-items">
+          <div class="community-item fade-in fade-delay-2">
+            <div class="community-item-num">01</div>
+            <div>
+              <h3>Empowering Local Artisans</h3>
+              <p>Fair wages and real growth opportunities for skilled Bangladeshi craftspeople. We preserve cultural heritage through every stitch while building economic security for workers and their families.</p>
+            </div>
+          </div>
+          <div class="community-item fade-in fade-delay-3">
+            <div class="community-item-num">02</div>
+            <div>
+              <h3>Education &amp; Awareness</h3>
+              <p>Workshops and community outreach on sustainable fashion choices — building a consumer base that understands the impact of what they wear and chooses responsibly.</p>
+            </div>
+          </div>
+          <div class="community-item fade-in fade-delay-4">
+            <div class="community-item-num">03</div>
+            <div>
+              <h3>Community Development</h3>
+              <p>Active support for poverty alleviation, gender equality, and environmental conservation — partnering with local organisations to create lasting, systemic change beyond our business operations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="community-right fade-in fade-delay-3">
+        <div class="impact-card">
+          <div class="impact-card-title">Our Social Commitments</div>
+          <div class="impact-rows">
+            <div class="impact-row">
+              <span class="impact-row-label">Business Type</span>
+              <span class="impact-row-val">Social Business</span>
+            </div>
+            <div class="impact-row">
+              <span class="impact-row-label">Primary Labour Standard</span>
+              <span class="impact-row-val">Verified Fair Wage</span>
+            </div>
+            <div class="impact-row">
+              <span class="impact-row-label">Supply Chain</span>
+              <span class="impact-row-val">Fully Transparent</span>
+            </div>
+            <div class="impact-row">
+              <span class="impact-row-label">Artisan Employment</span>
+              <span class="impact-row-val">Local &amp; Direct</span>
+            </div>
+            <div class="impact-row">
+              <span class="impact-row-label">Profit Distribution</span>
+              <span class="impact-row-val">Community-First</span>
+            </div>
+            <div class="impact-row">
+              <span class="impact-row-label">Registration</span>
+              <span class="impact-row-val">Bangladesh Licensed</span>
+            </div>
+          </div>
+        </div>
+        <div class="values-card">
+          <h3>Core Values</h3>
+          <div class="values-list">
+            <div class="value-item">Sustainability in every decision</div>
+            <div class="value-item">Responsibility to workers &amp; earth</div>
+            <div class="value-item">Community before profit</div>
+            <div class="value-item">Radical transparency</div>
+            <div class="value-item">Long-term systemic change</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY BEGOOD ─────────────────────────────── -->
+<section id="why">
+  <div class="why-bg"></div>
+  <div class="container">
+    <div class="why-header fade-in">
+      <div class="tag">Why Choose BEGOOD</div>
+      <h2 class="section-title">The right partner for<br>conscious sourcing.</h2>
+      <p>Whether you run a boutique, an NGO, or a corporate gifting program — here's why BEGOOD is your best choice.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-in fade-delay-1">
+        <div class="why-num">01</div>
+        <h3>Direct from Source</h3>
+        <p>Bangladesh-based operations give you direct access to skilled garment production — no unnecessary middlemen, competitive pricing, faster turnaround.</p>
+      </div>
+      <div class="why-card fade-in fade-delay-2">
+        <div class="why-num">02</div>
+        <h3>Verified Ethical</h3>
+        <p>Transparent fair labour standards throughout our supply chain. You know exactly who made your clothes — and that they were treated fairly.</p>
+      </div>
+      <div class="why-card fade-in fade-delay-3">
+        <div class="why-num">03</div>
+        <h3>Fully Organic</h3>
+        <p>Certified organic materials only. Biodegradable garments that genuinely match your brand's environmental values — not just a marketing claim.</p>
+      </div>
+      <div class="why-card fade-in fade-delay-1">
+        <div class="why-num">04</div>
+        <h3>Real Social Impact</h3>
+        <p>Every purchase creates community benefit. As a social business, our returns go back to artisan development and environmental programs — not just shareholders.</p>
+      </div>
+      <div class="why-card fade-in fade-delay-2">
+        <div class="why-num">05</div>
+        <h3>Custom Orders Welcome</h3>
+        <p>Small batches for boutiques, organisations, events, or corporate gifts. Flexible minimum quantities with the same premium quality and ethical standards.</p>
+      </div>
+      <div class="why-card fade-in fade-delay-3">
+        <div class="why-num">06</div>
+        <h3>Carbon Conscious</h3>
+        <p>Offset programs, eco-friendly logistics, and zero-waste production practices mean every order leaves the smallest possible environmental footprint.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PARTNER ────────────────────────────────── -->
+<section id="partner">
+  <div class="container">
+    <div class="partner-header fade-in">
+      <div class="tag">How to Partner</div>
+      <h2 class="section-title">Two ways to join<br>the BEGOOD movement.</h2>
+      <p>Whether you want to buy or invest, there's a place for you in what we're building.</p>
+    </div>
+    <div class="partner-grid">
+      <div class="partner-card pc-buyer fade-in fade-delay-1">
+        <div class="partner-card-header">
+          <div class="partner-card-header-icon">
+            <svg viewBox="0 0 24 24"><path d="M5 3h14l-1.68 5.39A2 2 0 0115.4 10H8.6a2 2 0 01-1.92-1.61L5 3zM3 10h18v11H3z"/></svg>
+          </div>
+          <h3>For Buyers &amp; Retailers</h3>
+          <p>Stock sustainable fashion that tells a story your customers will love.</p>
+        </div>
+        <div class="partner-card-body">
+          <ul class="partner-features">
+            <li>Source organic, ethical garments for your store or outlet</li>
+            <li>Custom orders for boutiques, organisations &amp; events</li>
+            <li>Full supply chain documentation available</li>
+            <li>Flexible small-batch minimum order quantities</li>
+            <li>Your brand identity + our ethics = stronger customer trust</li>
+            <li>Competitive pricing sourced directly from Bangladesh</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center;">Start a Buyer Enquiry</a>
+        </div>
+      </div>
+      <div class="partner-card pc-invest fade-in fade-delay-2">
+        <div class="partner-card-header">
+          <div class="partner-card-header-icon">
+            <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+          </div>
+          <h3>For Social Investors</h3>
+          <p>Your capital builds something real — a sustainable movement from Bangladesh to the world.</p>
+        </div>
+        <div class="partner-card-body">
+          <ul class="partner-features">
+            <li>Donations expand organic production capacity</li>
+            <li>Support artisan employment and fair wage programs</li>
+            <li>Fund sustainability education and community outreach</li>
+            <li>Contribute to verified carbon offset projects</li>
+            <li>Full transparency on how your investment is used</li>
+            <li>Join a community building long-term systemic change</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center;background:var(--teal);">Become an Investor</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ────────────────────────────────── -->
+<section id="contact">
+  <div class="contact-bg"></div>
+  <div class="container">
+    <div class="contact-header fade-in">
+      <div class="tag">Get In Touch</div>
+      <h2 class="section-title" style="color:var(--white)">Let's build something<br>good together.</h2>
+      <p>We'd love to hear from you — whether you're a retailer, an investor, or simply someone who cares.</p>
+    </div>
+    <div class="contact-grid fade-in fade-delay-1">
+      <div class="contact-card">
+        <div class="contact-icon ci1">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        </div>
+        <h4>Phone</h4>
+        <p>+88 017 111 82 302</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon ci2">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </div>
+        <h4>Email</h4>
+        <p>begoodscsl@gmail.com</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon ci3">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93V18c0-.55.45-1 1-1s1 .45 1 1v1.93A8.001 8.001 0 014.07 13H6c.55 0 1 .45 1 1s-.45 1-1 1H4.07A8.001 8.001 0 0111 4.07V6c0 .55.45 1 1 1s1-.45 1-1V4.07A8.001 8.001 0 0119.93 11H18c-.55 0-1 .45-1 1s.45 1 1 1h1.93A8.001 8.001 0 0111 19.93z"/></svg>
+        </div>
+        <h4>Website</h4>
+        <p>www.begood.my.canva.site</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon ci4">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
+        <h4>Address</h4>
+        <p>Rajuk Uttara Apt Project, Uttara, Dhaka-1230</p>
+      </div>
+    </div>
+    <div class="contact-form-wrap fade-in fade-delay-2">
+      <h3>Send Us a Message</h3>
+      <p>Fill in the form and we'll get back to you within 24 hours.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Full name">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="your@email.com">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Organisation</label>
+          <input type="text" placeholder="Company or organisation">
+        </div>
+        <div class="form-group">
+          <label>I am a</label>
+          <select>
+            <option value="">Select one...</option>
+            <option>Retailer / Buyer</option>
+            <option>Social Investor / Donor</option>
+            <option>Individual Customer</option>
+            <option>NGO / Organisation</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us what you're looking for — custom orders, bulk sourcing, investment, or just a conversation..."></textarea>
+      </div>
+      <div class="form-submit">
+        <a href="mailto:begoodscsl@gmail.com" class="btn btn-primary" style="font-size:0.9rem;padding:1rem 3rem;">
+          Send Message
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">BE<span>GOOD</span></div>
+        <div class="footer-tagline">Fashion that does good — for people, for planet.</div>
+      </div>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#products">Products</a>
+        <a href="#commitment">Sustainability</a>
+        <a href="#community">Impact</a>
+        <a href="#why">Why Us</a>
+        <a href="#partner">Partner</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 BEGOOD Sustainable Clothing Sourcing Limited. Dhaka, Bangladesh. All rights reserved.</p>
+      <div class="footer-bottom-right">
+        <span class="footer-pill">Licensed Trading Co.</span>
+        <span class="footer-pill">Registered Taxpayer</span>
+        <span class="footer-pill">Social Business</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── NAVBAR SCROLL ────────────────────────────────────────
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── MOBILE MENU ──────────────────────────────────────────
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  menu.classList.toggle('open');
+}
+
+// ── SCROLL FADE-IN ───────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ── SMOOTH ANCHOR SCROLL ─────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 72;
+      const y = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
+});
+
+// ── HERO ENTRANCE ANIMATION ──────────────────────────────
+window.addEventListener('load', () => {
+  document.querySelectorAll('#hero .fade-in').forEach(el => {
+    el.classList.add('visible');
+  });
+});
+</script>
+</body>
+</html>
